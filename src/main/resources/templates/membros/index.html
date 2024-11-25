@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lista de Membros</title>
+    <style>
+        /* Estilos gerais */
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f9;
+            margin: 0;
+            padding: 0;
+        }
+
+        /* Estilo do título */
+        h1 {
+            text-align: center;
+            margin-top: 20px;
+            color: #333;
+        }
+
+        /* Estilo para os botões */
+        .btn {
+            background-color: #4CAF50;
+            color: white;
+            padding: 10px 15px;
+            text-align: center;
+            text-decoration: none;
+            border-radius: 5px;
+            display: inline-block;
+            margin: 5px;
+            font-size: 16px;
+            transition: background-color 0.3s ease;
+        }
+
+        .btn:hover {
+            background-color: #45a049;
+        }
+
+        /* Botões específicos */
+        .btn-primary {
+            background-color: #007bff;
+        }
+
+        .btn-primary:hover {
+            background-color: #0056b3;
+        }
+
+        .btn-danger {
+            background-color: #dc3545;
+        }
+
+        .btn-danger:hover {
+            background-color: #c82333;
+        }
+
+        /* Estilo da tabela */
+        table {
+            width: 100%;
+            margin: 20px 0;
+            border-collapse: collapse;
+            background-color: #fff;
+        }
+
+        table, th, td {
+            border: 1px solid #ddd;
+        }
+
+        th, td {
+            padding: 12px;
+            text-align: left;
+            font-size: 14px;
+        }
+
+        th {
+            background-color: #f4f4f4;
+            color: #333;
+        }
+
+        td {
+            background-color: #fafafa;
+        }
+
+        td.actions {
+            display: flex;
+            justify-content: space-evenly;
+        }
+
+        /* Estilo para a mensagem de ausência de gerentes */
+        div {
+            text-align: center;
+            font-size: 18px;
+            color: #777;
+        }
+
+        /* Responsividade */
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 24px;
+            }
+
+            .btn {
+                padding: 8px 12px;
+                font-size: 14px;
+            }
+
+            table {
+                font-size: 12px;
+            }
+
+            th, td {
+                padding: 8px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <h1>Lista de Membros</h1>
+    <a th:href="@{/projetos/detalhar/{id}(id=${projeto.id})}" class="btn" style="margin-bottom: 5px;">Voltar para o projeto</a>
+    <br>
+    <a th:href="@{/membros/novo/{id}(id=${projeto.id})}" class="btn" style="margin-bottom: 5px;">Adicionar Novo Membro</a>
+    <div th:if="${#lists.isEmpty(membros)}">
+        <p>Não existem membros ainda.</p>
+    </div>
+    <table th:if="${not #lists.isEmpty(membros)}">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Nome</th>
+                <th>Telefone</th>
+                <th>E-mail</th>
+                <th>Cargo</th>
+                <th>Ações</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr th:each="membro : ${membros}">
+                <td th:text="${membro.id}"></td>
+                <td th:text="${membro.nome}"></td>
+                <td th:text="${membro.tel}"></td>
+                <td th:text="${membro.email}"></td>
+                <td th:text="${membro.cargo}"></td>
+                <td class="actions">
+                    <a th:href="@{/membros/editar/{id}(id=${membro.id})}" class="btn btn-primary">Editar</a> 
+                    <a th:href="@{/membros/excluir/{id}(id=${membro.id})}" class="btn btn-danger">Excluir</a>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</body>
+</html>

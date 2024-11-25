@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cadastrar Membro</title>
+    <style>
+        /* Estilos gerais */
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f9;
+            margin: 0;
+            padding: 0;
+        }
+
+        /* Estilo do título */
+        h1 {
+            text-align: center;
+            margin-top: 20px;
+            color: #333;
+        }
+
+        /* Formulário */
+        form {
+            max-width: 600px;
+            margin: 0 auto;
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        div {
+            margin-bottom: 15px;
+        }
+
+        label {
+            font-size: 16px;
+            color: #333;
+            display: block;
+            margin-bottom: 5px;
+        }
+
+        input[type="text"],
+        input[type="email"],
+        input[type="number"] {
+            width: 100%;
+            padding: 10px;
+            font-size: 16px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            box-sizing: border-box;
+        }
+
+        input[readonly] {
+            background-color: #f0f0f0;
+            cursor: not-allowed;
+        }
+
+        button {
+            background-color: #4CAF50;
+            color: white;
+            padding: 10px 20px;
+            font-size: 16px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            width: 100%;
+            transition: background-color 0.3s ease;
+        }
+
+        button:hover {
+            background-color: #45a049;
+        }
+
+        /* Estilo para o botão de "Gravar" */
+        button[type="submit"] {
+            background-color: #007bff;
+            font-weight: bold;
+        }
+
+        button[type="submit"]:hover {
+            background-color: #0056b3;
+        }
+
+        /* Estilo de responsividade */
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 24px;
+            }
+
+            form {
+                padding: 15px;
+            }
+
+            input[type="text"],
+            input[type="email"],
+            input[type="number"] {
+                font-size: 14px;
+            }
+
+            button {
+                font-size: 14px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <h1>Cadastrar Novo Membro</h1>
+    <form th:action="@{/membros/novo/{idProjeto}(idProjeto=${projeto.id})}" th:object="${membro}" method="post">
+        <div>
+            <label>Nome do Membro:</label>
+            <input type="text" th:field="*{nome}">
+        </div>
+        <div>
+            <label>Telefone do Membro:</label>
+            <input type="text" th:field="*{tel}">
+        </div>
+        <div>
+            <label>E-mail do Membro:</label>
+            <input type="email" th:field="*{email}">
+        </div>
+        <div>
+            <label>Cargo do Membro:</label>
+            <input type="text" th:field="*{cargo}">
+        </div>
+        <div>
+            <label>ID do projeto:</label>
+            <input type="number" th:field="*{projeto.id}" th:value="${projeto.id}" readonly>
+        </div>
+        <button type="submit">Gravar</button>
+    </form>
+</body>
+</html>

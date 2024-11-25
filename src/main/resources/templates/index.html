@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lista de Projetos</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        table, th, td {
+            border: 1px solid black;
+        }
+        th, td {
+            padding: 10px;
+            text-align: left;
+        }
+        th {
+            background-color: #f2f2f2;
+        }
+        .actions {
+            display: flex;
+            gap: 10px;
+        }
+        .btn {
+            padding: 5px 10px;
+            background-color: #4CAF50;
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+        }
+        .btn-danger {
+            background-color: #f44336;
+        }
+        .btn-primary {
+            background-color: #008CBA;
+        }
+        .message {
+            font-size: 18px;
+            color: red;
+        }
+    </style>
+</head>
+<body>
+    <h1>Lista de Projetos</h1>
+    <a th:href="@{/projetos/novo}" class="btn" style="margin-bottom: 5px;">Adicionar Novo Projeto</a>
+    <div th:if="${#lists.isEmpty(projetos)}">
+        <p>Não existem projetos ainda.</p>
+    </div>
+    <table th:if="${not #lists.isEmpty(projetos)}">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Nome</th>
+                <th>Data de Início</th>
+                <th>Data de Fim</th>
+                <th>Status</th>
+                <th>Ações</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr th:each="projeto : ${projetos}">
+                <td th:text="${projeto.id}"></td>
+                <td th:text="${projeto.nome}"></td>
+                <td th:text="${projeto.dataInicio}"></td>
+                <td th:text="${projeto.dataFim}"></td>
+                <td th:text="${projeto.status}"></td>
+                <td class="actions">
+                    <a th:href="@{/projetos/detalhar/{id}(id=${projeto.id})}" class="btn btn-primary">Detalhes</a> 
+                    <a th:href="@{/projetos/editar/{id}(id=${projeto.id})}" class="btn btn-primary">Editar</a> 
+                    <a th:href="@{/projetos/excluir/{id}(id=${projeto.id})}" class="btn btn-danger">Excluir</a>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</body>
+</html>

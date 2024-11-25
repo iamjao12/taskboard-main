@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Detalhar Projeto</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+        h1 {
+            color: #333;
+        }
+        form {
+            max-width: 600px;
+            margin: 0 auto;
+            background-color: #f9f9f9;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        label {
+            font-weight: bold;
+            margin-top: 10px;
+            display: inline-block;
+        }
+        input {
+            width: 100%;
+            padding: 8px;
+            margin-bottom: 10px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+        .actions {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 20px;
+        }
+        .btn {
+            padding: 10px 20px;
+            background-color: #4CAF50;
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+            text-align: center;
+            border: none;
+            cursor: pointer;
+        }
+        .btn-danger {
+            background-color: #f44336;
+        }
+        .btn-secondary {
+            background-color: #007bff;
+        }
+        .btn-secondary:hover {
+            background-color: #0056b3;
+        }
+        .btn-danger:hover {
+            background-color: #c82333;
+        }
+        .btn:hover {
+            opacity: 0.9;
+        }
+        .extra-actions {
+            margin-top: 20px;
+            display: flex;
+            justify-content: space-between;
+        }
+        .gerentes-lista {
+            margin-top: 20px;
+            background-color: #f9f9f9;
+            padding: 10px;
+            border-radius: 8px;
+            box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+        }
+        .gerentes-lista ul {
+            list-style-type: none;
+            padding-left: 0;
+        }
+        .gerentes-lista li {
+            padding: 8px 0;
+            border-bottom: 1px solid #ccc;
+        }
+        .membros-lista {
+            margin-top: 20px;
+            background-color: #f9f9f9;
+            padding: 10px;
+            border-radius: 8px;
+            box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+        }
+        .membros-lista ul {
+            list-style-type: none;
+            padding-left: 0;
+        }
+        .membros-lista li {
+            padding: 8px 0;
+            border-bottom: 1px solid #ccc;
+        }
+    </style>
+</head>
+<body>
+    <h1>Informações do Projeto</h1>
+    <form th:object="${projeto}">
+        <div>
+            <label>ID do Projeto:</label>
+            <input type="text" th:field="*{id}" readonly="readonly">
+        </div>
+        <div>
+            <label>Nome do Projeto:</label>
+            <input type="text" th:field="*{nome}" readonly="readonly">
+        </div>
+        <div>
+            <label>Data de Início:</label>
+            <input type="date" th:field="*{dataInicio}" readonly="readonly">
+        </div>
+        <div>
+            <label>Data de Encerramento:</label>
+            <input type="date" th:field="*{dataFim}" readonly="readonly">
+        </div>
+        <div>
+            <label>Status:</label>
+            <input type="text" th:field="*{status}" readonly="readonly">
+        </div>
+    </form>
+    <div class="gerentes-lista">
+        <h3>Gerentes do Projeto:</h3>
+        <ul>
+            <li th:each="gerente : ${gerentes}" th:text="${gerente.nome}"></li>
+        </ul>
+    </div>
+    <div class="membros-lista">
+        <h3>Membros do Projeto:</h3>
+        <ul>
+            <li th:each="membro : ${membros}" th:text="${membro.nome}"></li>
+        </ul>
+    </div>
+    <div class="actions">
+        <a th:href="@{/projetos/}" class="btn">Voltar</a>
+    </div>
+
+    <div class="extra-actions">
+        <a th:href="@{/gerentes/listar/{id}(id=${projeto.id})}" class="btn btn-secondary">Gerenciar Gerentes</a>
+        <a th:href="@{/membros/listar/{id}(id=${projeto.id})}" class="btn btn-secondary">Gerenciar Membros</a>
+    </div>
+    </div>
+</body>
+</html>

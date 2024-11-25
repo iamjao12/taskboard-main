@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Editar Gerente</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+        h1 {
+            color: #333;
+        }
+        form {
+            max-width: 600px;
+            margin: 0 auto;
+            background-color: #f9f9f9;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        label {
+            font-weight: bold;
+            margin-top: 10px;
+            display: inline-block;
+        }
+        input {
+            width: 100%;
+            padding: 8px;
+            margin-bottom: 10px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+        button {
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+        button:hover {
+            background-color: #45a049;
+        }
+    </style>
+</head>
+<body>
+    <h1>Editar Gerente</h1>
+    <form th:action="@{/gerentes/editar}" th:object="${gerente}" method="post">
+        <div>
+            <label>ID do Gerente:</label>
+            <input type="text" th:field="*{id}" readonly="readonly">
+        </div>
+        <div>
+            <label>Nome do Gerente:</label>
+            <input type="text" th:field="*{nome}">
+        </div>
+        <div>
+            <label>Telefone do Gerente:</label>
+            <input type="text" th:field="*{tel}">
+        </div>
+        <div>
+            <label>E-mail do Gerente:</label>
+            <input type="email" th:field="*{email}">
+        </div>
+        <div>
+            <label>Cargo do Gerente:</label>
+            <input type="text" th:field="*{cargo}">
+        </div>
+        <div>
+            <label>Nível de acesso do Gerente:</label>
+            <input type="number" th:field="*{nivel_acesso}">
+        </div>
+        <div>
+            <input type="hidden" th:field="*{projeto.id}">
+        </div>
+        <button type="submit">Gravar</button>
+    </form>
+</body>
+</html>

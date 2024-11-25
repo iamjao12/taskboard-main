@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cadastrar Projeto</title>
+</head>
+<body>
+    <h1>Cadastrar Novo Projeto</h1>
+    <form th:action="@{/projetos/novo}" th:object="${projeto}" method="post">
+        <div>
+            <label>ID do Projeto:</label>
+            <input type="text" th:field="*{id}">
+        </div>
+        <div>
+            <label>Nome do Projeto:</label>
+            <input type="text" th:field="*{nome}">
+        </div>
+        <div>
+            <label>Data de Início:</label>
+            <input type="date" th:field="*{dataInicio}">
+        </div>
+        <div>
+            <label>Data de Encerramento:</label>
+            <input type="date" th:field="*{dataFim}">
+        </div>
+        <div>
+            <label>Status:</label>
+            <input type="text" th:field="*{status}">
+        </div>
+        <button type="submit">Gravar</button>
+    </form>
+</body>
+</html>
