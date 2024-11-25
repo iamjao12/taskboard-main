@@ -91,7 +91,7 @@
 </head>
 <body>
     <div class="container">
-        <h1 class="title">Informações do Projeto</h1>
+        <h1 class="title">Informações do Membro</h1>
         <form th:action="@{/membros/excluir}" th:object="${membro}" method="post" class="form">
             <div class="form-group">
                 <label for="id">ID do Membro:</label>
@@ -114,7 +114,6 @@
                 <input type="text" id="cargo" th:field="*{cargo}" readonly class="input-field">
             </div>
             <div class="button-group">
-                <a th:href="@{/membros/}" class="btn btn-secondary">Voltar</a>
                 <button type="submit" class="btn btn-danger">Excluir</button>
             </div>
         </form>
